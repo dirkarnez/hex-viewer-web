@@ -19,15 +19,15 @@
         throw "Only 1 file"
       }
       
-      const uint8ArrayList = await Promise.all(fileList.map(file => new Promise((res) => {
+      const arrayBufferList = await Promise.all(fileList.map(file => new Promise((res) => {
         const reader = new FileReader();
         reader.onload = (event) => {
-          res(new Uint8Array(event.target.result));
+          res(/*new Uint8Array(event.target.result)*/ event.target.result);
         }
         reader.readAsArrayBuffer(file);
       })));
       
-      const dataview = new DataView(uint8ArrayList[0]);
+      const dataview = new DataView(arrayBufferList[0]);
       debugger;
     }, false);
   </script>
