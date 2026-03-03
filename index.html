@@ -28,7 +28,11 @@
       })));
       
       const dataview = new DataView(arrayBufferList[0]);
-      debugger;
+      const firstUint32 = dataview.getUint32(0, false);
+      if (firstUint32 == 0x27051956) {
+        console.log(`0x${firstUint32.toString(16)} is magic number in u-boot header in big-endian (network byte order)`);
+      }
+      
     }, false);
   </script>
 </body>
