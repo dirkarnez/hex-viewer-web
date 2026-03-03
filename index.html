@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>    
+  <input type="file" id="file-input">
+  <script>
+    const fileInputElement = document.getElementById("file-input");
+    fileInputElement.addEventListener("change", async function () {
+      const fileList = Array
+      .from(this.files);
+
+      if (filesList.length > 1) {
+        throw "Only 1 file"
+      }
+      
+      const uint8ArrayList = await Promise.all(fileList.map(file => new Promise((res) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          res(new Uint8Array(event.target.result));
+        }
+        reader.readAsArrayBuffer(file);
+      })));
+      
+      const dataview = new DataView(uint8ArrayList[0]);
+      debugger;
+    }, false);
+  </script>
+</body>
+</html>
